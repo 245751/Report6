@@ -1,18 +1,30 @@
 package jp.ac.uryukyu.ie.e245751;
+import java.util.Scanner;
 //ゲームの進行管理などを行うクラス
 public class GameMaster {
     Bord bord = new Bord();
     int player = 0;//現在のプレイヤーを表します。0は黒番、1は白番を表します。
+    Boolean chekFlag = false;//碁石を置くことが出来るかどうかを判断するために使います
+    Scanner scanner= new Scanner(System.in);
     public GameMaster(){
         bord.bordReset();//盤を生成
     }
 
     //プレイヤーが碁石を置くためのメソッド。ターン管理も行う。
-    public void put(int x,int y){
-        bord.putStone(player, x, y);
-        bord.display();
+    public void put(){
+        while(chekFlag==false){
+            System.out.println("座標を入力してください");
+            String coordinate = scanner.nextLine();
+            String[] coordinates = coordinate.split("[, ]");
+            CheckPut( Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+            if(chekFlag==true){
+                bord.putStone(player, Integer.parseInt(coordinates[0]),Integer.parseInt(coordinates[1]));
+                bord.display();
+            }
+        }
         if(player==0){player=1;}
         else{player=0;}
+        chekFlag=false;
     }
     
     //揃っている箇所があるかを判定するメソッド
@@ -29,7 +41,7 @@ public class GameMaster {
                 }
             }
         }
-        
+
         //縦の判定
         for(int line=0;line<8;line++){
             for(int move=0;move<4;move++){
@@ -65,6 +77,16 @@ public class GameMaster {
         }
     }
 
+    //碁石をおくことが出来るかを調べるためのメソッド
+    public void CheckPut(int x,int y){
+        char[][] tempBord = bord.getBord();
+        if(tempBord[y-1][x-1]!='*'){
+            System.out.println("ここはすでに置かれています");
+        }
+        else{
+            chekFlag=true;
+        }
+    }
 
 
 }
