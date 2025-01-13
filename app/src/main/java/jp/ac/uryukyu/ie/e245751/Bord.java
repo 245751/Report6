@@ -32,6 +32,9 @@ public class Bord {
         if(player==0){bord[y][x]=(char)('○');}
         else{bord[y][x]=(char)('●');}
     }
+
+    //bordのgetter
+    public char[][] getBord(){return bord;}
 }
 
 

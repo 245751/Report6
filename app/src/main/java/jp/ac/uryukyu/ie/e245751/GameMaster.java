@@ -5,6 +5,7 @@ public class GameMaster {
     Bord bord = new Bord();
     int player = 0;//現在のプレイヤーを表します。0は黒番、1は白番を表します。
     Boolean chekFlag = false;//碁石を置くことが出来るかどうかを判断するために使います
+    Boolean continueFlag = true;//ゲームが続くのかを確認するためのもの
     Scanner scanner= new Scanner(System.in);
     public GameMaster(){
         bord.bordReset();//盤を生成
@@ -35,9 +36,11 @@ public class GameMaster {
             for(int shift=0;shift<4;shift++){
                 if(row[shift]==row[shift+1] && row[shift+1]==row[shift+2] && row[shift+2]==row[shift+3] && row[shift+3]==row[shift+4] && row[shift]=='○'){
                     System.out.println("○の横揃った！！");
+                    continueFlag=false;
                 }
                 if(row[shift]==row[shift+1] && row[shift+1]==row[shift+2] && row[shift+2]==row[shift+3] && row[shift+3]==row[shift+4] && row[shift]=='●'){
                     System.out.println("●の横揃った！！");
+                    continueFlag=false;
                 }
             }
         }
@@ -47,9 +50,11 @@ public class GameMaster {
             for(int move=0;move<4;move++){
                 if(tempBord[move][line]==tempBord[move+1][line] && tempBord[move+1][line]==tempBord[move+2][line] && tempBord[move+2][line]==tempBord[move+3][line] && tempBord[move+3][line]==tempBord[move+4][line] && tempBord[move][line]=='○'){
                     System.out.println("○の縦揃った！！");
+                    continueFlag=false;
                 }
                 if(tempBord[move][line]==tempBord[move+1][line] && tempBord[move+1][line]==tempBord[move+2][line] && tempBord[move+2][line]==tempBord[move+3][line] && tempBord[move+3][line]==tempBord[move+4][line] && tempBord[move][line]=='●'){
                     System.out.println("●の縦揃った！！");
+                    continueFlag=false;
                 }
             }
         }
@@ -59,9 +64,11 @@ public class GameMaster {
             for(int y=0;y<4;y++){
                 if(tempBord[x][y]==tempBord[x+1][y+1] && tempBord[x+1][y+1]==tempBord[x+2][y+2] && tempBord[x+2][y+2]==tempBord[x+3][y+3] && tempBord[x+3][y+3]==tempBord[x+4][y+4] && tempBord[x][y]=='○'){
                     System.out.println("○の斜め揃った！！（１）");
+                    continueFlag=false;
                 }
                 if(tempBord[x][y]==tempBord[x+1][y+1] && tempBord[x+1][y+1]==tempBord[x+2][y+2] && tempBord[x+2][y+2]==tempBord[x+3][y+3] && tempBord[x+3][y+3]==tempBord[x+4][y+4] && tempBord[x][y]=='●'){
                     System.out.println("●の斜め揃った！！（１）");
+                    continueFlag=false;
                 }
             }
         }
@@ -69,9 +76,11 @@ public class GameMaster {
             for(int y=0;y<4;y++){
                 if(tempBord[x][y]==tempBord[x-1][y+1] && tempBord[x-1][y+1]==tempBord[x-2][y+2] && tempBord[x-2][y+2]==tempBord[x-3][y+3] && tempBord[x-3][y+3]==tempBord[x-4][y+4] && tempBord[x][y]=='○'){
                     System.out.println("○の斜め揃った！！（2）");
+                    continueFlag=false;
                 }
                 if(tempBord[x][y]==tempBord[x-1][y+1] && tempBord[x-1][y+1]==tempBord[x-2][y+2] && tempBord[x-2][y+2]==tempBord[x-3][y+3] && tempBord[x-3][y+3]==tempBord[x-4][y+4] && tempBord[x][y]=='●'){
                     System.out.println("●の斜め揃った！！（2）");
+                    continueFlag=false;
                 }
             }
         }
@@ -87,6 +96,8 @@ public class GameMaster {
             chekFlag=true;
         }
     }
-
+    
+    //continueFlagのgetter
+    public boolean GetContinueFlag(){return continueFlag;}
 
 }
